@@ -1,16 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ActivityResultState extends StatefulWidget
 {
+
+  String value;
+  String Keyy;
+  String Opraion;
+
+  ActivityResultState({
+    required this.Opraion,
+    required this.Keyy,
+    required this.value,
+  });
+
+
   @override
-  State<StatefulWidget> createState() => ActivityResult();
+  State<StatefulWidget> createState() => ActivityResult(Opraion: this.Opraion,Keyy: this.Keyy,value: this.value);
+
 }
 
 class ActivityResult extends State<ActivityResultState>
 {
 
   String result="Result";
+
+  String value;
+  String Keyy;
+  String Opraion;
+
+  ActivityResult({
+    required this.Opraion,
+    required this.Keyy,
+    required this.value
+  });
 
 
   @override
@@ -87,7 +111,10 @@ class ActivityResult extends State<ActivityResultState>
                   backgroundColor: Colors.green
               ),
               child: Text("Copy",style: TextStyle(color: Colors.white)),
-              onPressed: (){ },
+              onPressed: ()async { 
+                await Clipboard.setData(ClipboardData(text: result));
+                
+              },
             ),
           )
         ],

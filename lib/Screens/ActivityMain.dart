@@ -13,6 +13,11 @@ class ActivityMainState extends StatefulWidget
 class ActivityMain extends State<ActivityMainState>
 {
 
+
+  var KeyTextBox=TextEditingController();
+  var TextTextBox=TextEditingController();
+
+
   //Main Function Start
   @override
   Widget build(BuildContext context)
@@ -60,6 +65,7 @@ class ActivityMain extends State<ActivityMainState>
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(10),
       child: TextField(
+        controller:KeyTextBox,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Encript Key',
@@ -79,12 +85,13 @@ class ActivityMain extends State<ActivityMainState>
       height: MediaQuery.of(context).size.height-150,
       padding: EdgeInsets.all(10),
       child: TextField(
+        controller:TextTextBox,
         keyboardType: TextInputType.multiline,
         maxLines: 10,
         maxLength: 4096,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          labelText: 'Encript Key',
+          labelText: 'Value',
           hintText: 'Exmaple : abc65564cdscjkdscbdjs',
         ),
       ),
@@ -140,14 +147,14 @@ class ActivityMain extends State<ActivityMainState>
   //OnClick Encript Button Event Start
   void Encript_OnClick(BuildContext context)
   {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>ActivityResultState()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>ActivityResultState(Opraion: "ENC",Keyy: KeyTextBox.text,value: TextTextBox.text)));
   }
   //OnClick Encript Button Event End
 
   //OnClick Decript Button Event Start
   void Decript_OnClick(BuildContext context)
   {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>ActivityResultState()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>ActivityResultState(Opraion: "DEC",Keyy: KeyTextBox.text,value: TextTextBox.text)));
   }
   //OnClick Decript Button Event End
 
