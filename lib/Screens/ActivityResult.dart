@@ -1,6 +1,10 @@
+import 'package:encript_project/Screens/enc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:convert';
+import 'package:encrypt/encrypt.dart';
 
 class ActivityResultState extends StatefulWidget
 {
@@ -35,6 +39,32 @@ class ActivityResult extends State<ActivityResultState>
     required this.Keyy,
     required this.value
   });
+
+
+
+
+  @override
+  void initState()
+  {
+    setState(()
+    {
+
+      if(this.Opraion=="ENC")
+      {
+        debugPrint("ENC");
+        result = enc(Keyy, value);
+      }
+      else
+      {
+        debugPrint("DEC");
+        result = dec(Keyy, value);
+      }
+
+    });
+  }
+
+
+
 
 
   @override
@@ -98,13 +128,15 @@ class ActivityResult extends State<ActivityResultState>
   Widget BottomButtons(BuildContext context)
   {
     return Container(
+      margin: EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width,
       height: 60,
       child: Row(
         children: [
 
           Container(
-            width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.all(5),
+            width: MediaQuery.of(context).size.width-30,
             height: 60,
             child: TextButton(
               style: TextButton.styleFrom(
@@ -113,7 +145,14 @@ class ActivityResult extends State<ActivityResultState>
               child: Text("Copy",style: TextStyle(color: Colors.white)),
               onPressed: ()async { 
                 await Clipboard.setData(ClipboardData(text: result));
-                
+                Fluttertoast.showToast(
+                  msg: 'hello',
+                  gravity: ToastGravity.CENTER,
+                  backgroundColor: Colors.black,
+                  textColor: Colors.white,
+                  webBgColor: '#000000',
+                  webPosition: "center"
+                );
               },
             ),
           )

@@ -66,10 +66,11 @@ class ActivityMain extends State<ActivityMainState>
       padding: EdgeInsets.all(10),
       child: TextField(
         controller:KeyTextBox,
+        maxLength: 32,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Encript Key',
-          hintText: 'Exmaple : abc65564cdscjkdscbdjs',
+          hintText: 'Exmaple : my32lengthsupersecretnooneknows1 (32 Char Key)',
         ),
       ),
     );
@@ -104,13 +105,15 @@ class ActivityMain extends State<ActivityMainState>
   Widget BottomButtons(BuildContext context)
   {
     return Container(
+      margin: EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width,
       height: 60,
       child: Row(
         children: [
 
           Container(
-            width: MediaQuery.of(context).size.width/2,
+            margin: EdgeInsets.all(5),
+            width: MediaQuery.of(context).size.width/2-20,
             height: 60,
             child: TextButton(
               style: TextButton.styleFrom(
@@ -122,7 +125,8 @@ class ActivityMain extends State<ActivityMainState>
           )
           ,
           Container(
-            width: MediaQuery.of(context).size.width/2,
+            margin: EdgeInsets.all(5),
+            width: MediaQuery.of(context).size.width/2-20,
             height: 60,
             child: TextButton(
               child: Text("Decript",style: TextStyle(color: Colors.white)),
@@ -147,14 +151,23 @@ class ActivityMain extends State<ActivityMainState>
   //OnClick Encript Button Event Start
   void Encript_OnClick(BuildContext context)
   {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>ActivityResultState(Opraion: "ENC",Keyy: KeyTextBox.text,value: TextTextBox.text)));
+    if(KeyTextBox.text.length == 32)
+    {
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+          ActivityResultState(
+              Opraion: "ENC", Keyy: KeyTextBox.text, value: TextTextBox.text)));
+    }
   }
   //OnClick Encript Button Event End
 
   //OnClick Decript Button Event Start
   void Decript_OnClick(BuildContext context)
   {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>ActivityResultState(Opraion: "DEC",Keyy: KeyTextBox.text,value: TextTextBox.text)));
+    if(KeyTextBox.text.length == 32) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+          ActivityResultState(
+              Opraion: "DEC", Keyy: KeyTextBox.text, value: TextTextBox.text)));
+    }
   }
   //OnClick Decript Button Event End
 
